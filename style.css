@@ -1,0 +1,15 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+  padding: 10px;
+  color: blue;
+}
+/*# sourceMappingURL=style.css.map */
