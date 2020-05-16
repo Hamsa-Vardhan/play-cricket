@@ -4204,6 +4204,28 @@ html {
   }
 }
 
+:root {
+  --all__font: 3rem;
+}
+
+@media (max-width: 830px) {
+  :root {
+    --all__font: 2rem;
+  }
+}
+
+@media (max-width: 560px) {
+  :root {
+    --all__font: 1.5rem;
+  }
+}
+
+@media (max-width: 400px) {
+  :root {
+    --all__font: 0.75rem;
+  }
+}
+
 * {
   padding: 0px;
   margin: 0px;
@@ -4225,21 +4247,21 @@ html {
 }
 
 header {
-  padding: calc($__all_font / 1.5);
+  padding: calc(var(--all__font) / 20);
   background-color: #586930;
   text-transform: capitalize;
   font-family: 'Lobster', cursive;
 }
 
 header marquee {
-  font-size: 3rem;
+  font-size: var(--all__font);
   background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   background-clip: text;
   color: transparent;
 }
 
 header .nav {
-  padding: calc(3rem / 8);
+  padding: calc(var(--all__font) / 8);
   display: none;
 }
 
@@ -4254,9 +4276,9 @@ header .nav ul {
 }
 
 header .nav ul li {
-  padding: calc(3rem / 8) calc(3rem / 4);
-  font-size: calc(3rem / 2);
-  border-radius: 0.2rem;
+  padding: calc(var(--all__font) / 8) calc(var(--all__font) / 4);
+  font-size: calc(var(--all__font) / 2);
+  border-radius: calc(var(--all_font) / 15);
   border: 1px solid white;
   color: white;
   cursor: pointer;
@@ -4288,17 +4310,17 @@ header .nav ul li {
 
 .first section h1, .first section span {
   color: white;
-  font-size: 3.6rem;
+  font-size: calc(var(--all__font) * 1.2);
 }
 
 .first section button {
   all: unset;
-  margin: calc(3rem *2);
-  font-size: 3rem;
+  margin: calc(var(--all__font) *2);
+  font-size: var(--all__font);
   color: white;
   border: 1px solid white;
-  border-radius: 5px;
-  padding: calc(3rem / 8) 3rem;
+  border-radius: calc(var(--all_font) / 20);
+  padding: calc(var(--all__font) / 8) var(--all__font);
   cursor: pointer;
   font-weight: bolder;
   -webkit-transition: background-color 400ms ease-in-out, color 400ms ease-out, -webkit-transform 400ms ease-in;
