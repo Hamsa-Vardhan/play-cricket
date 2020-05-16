@@ -4240,7 +4240,7 @@ html {
   display: none;
 }
 
-.active, header .nav ul li:hover, .first section button:hover {
+.active, header .nav ul li:hover, .first section button:hover, .second section .instructions button:hover {
   background-color: white;
   color: black !important;
   -webkit-transform: scale(1.15);
@@ -4338,8 +4338,71 @@ header .nav ul li a {
           transform: scale(1.05);
 }
 
+.second section .instructions h1, .second .first section .instructions span, .first .second section .instructions span {
+  font-size: calc(var(--all__font) / 1.5);
+  padding: calc(var(--all__font) / 8) var(--all__font);
+  margin-right: var(--all__font);
+  border: 1px solid white;
+  border-radius: calc(var(--all__font) / 5);
+}
+
 .second {
   min-height: 100vh;
   background-color: #000014;
+  color: white;
+  padding: 1rem;
+  font-family: 'Russo One', sans-serif;
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+}
+
+.second section .instructions {
+  place-self: top;
+  margin: calc(var(--all__font) * 2);
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.second section .instructions button {
+  all: unset;
+  font-size: calc(var(--all__font) / 1.5);
+  padding: calc(var(--all__font) / 8) var(--all__font);
+  margin-right: var(--all__font);
+  border: 1px solid white;
+  border-radius: calc(var(--all__font) / 5);
+  cursor: pointer;
+}
+
+.second .tables {
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.second .tables > div {
+  border: 1px solid white;
+}
+
+.second .tables > div .row {
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  margin: calc(var(--all__font) / 10);
+  padding: calc(var(--all__font) / 10);
+  margin: calc(var(--all__font) / 5) 0px;
+}
+
+.second .tables > div .row:last-child {
+  border-bottom: none;
+}
+
+.second .tables > div .row div {
+  text-align: center;
+  text-transform: capitalize;
+  padding: calc(var(--all__font)/10) 0px;
+}
+
+.second .tables > div .row .active, .second .tables > div .row header .nav ul li:hover, header .nav ul .second .tables > div .row li:hover, .second .tables > div .row .first section button:hover, .first section .second .tables > div .row button:hover, .second .tables > div .row section .instructions button:hover, .second section .instructions .tables > div .row button:hover {
+  border-radius: calc(var(--all__font) / 10);
 }
 /*# sourceMappingURL=style.css.map */
