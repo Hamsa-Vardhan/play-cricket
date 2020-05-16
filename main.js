@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function (_) {
+document.addEventListener('DOMContentLoaded', function () {
     var __header = document.createElement('header');
     __header.className = 'container-fluid';
     document.body.appendChild(__header);
@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function (_) {
     __nav.appendChild(__ul);
     var __first = document.createElement('div');
     __first.className = 'first container-fluid';
+    __first.id = '_first';
     document.body.appendChild(__first);
     var __section_first = document.createElement('section');
     __first.appendChild(__section_first);
@@ -28,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function (_) {
     __marquee.direction = 'right';
     __marquee.scrollAmount = 4;
     //Have to add nav content;
-    __ul.innerHTML += "<li><a>Home</a></li>\n\t\t\t\t\t<li class=\"active\"><a>check your luck</a></li>\n\t\t\t\t\t<li><a>With computer</a></li>\n\t\t\t\t\t<li><a>Two Player<a></li>";
+    __ul.innerHTML += "<li class='active'><a href=\"#_first\">Home</a></li>\n\t\t\t\t\t<li><a href='#_second'>check your luck</a></li>\n\t\t\t\t\t<li><a>With computer</a></li>\n\t\t\t\t\t<li><a>Two Player<a></li>\n\t\t\t\t\t<li><a>world cup</a></li>";
     __h1_first.textContent = 'Welcome to have some fun';
     __span_h1_first.textContent = 'playing crciket';
     __button_first.type = 'button';
@@ -40,5 +41,16 @@ document.addEventListener('DOMContentLoaded', function (_) {
         __nav.style.opacity = '1';
         __marquee.style.display = 'none';
     });
+    document.querySelectorAll('.nav li').forEach(function (v) {
+        v.addEventListener('click', function () {
+            document.querySelector('.nav .active').classList.remove('active');
+            this.classList.add('active');
+        });
+    });
+    //second page starts
+    var __second = document.createElement('div');
+    document.body.appendChild(__second);
+    __second.className = 'second container-fluid';
+    __second.id = '_second';
 });
 //# sourceMappingURL=main.js.map

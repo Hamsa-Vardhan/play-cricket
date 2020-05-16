@@ -4212,6 +4212,7 @@ html {
   :root {
     --all__font: 2rem;
   }
+  max-height: calc(max-width * 0.75);
 }
 
 @media (max-width: 560px) {
@@ -4269,9 +4270,8 @@ header .nav ul {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
   list-style: none;
 }
 
@@ -4282,10 +4282,14 @@ header .nav ul li {
   border: 1px solid white;
   color: white;
   cursor: pointer;
-  -webkit-transition: background-color 400ms ease-in-out, color 400ms ease-out, -webkit-transform 400ms ease-in;
-  transition: background-color 400ms ease-in-out, color 400ms ease-out, -webkit-transform 400ms ease-in;
-  transition: transform 400ms ease-in, background-color 400ms ease-in-out, color 400ms ease-out;
-  transition: transform 400ms ease-in, background-color 400ms ease-in-out, color 400ms ease-out, -webkit-transform 400ms ease-in;
+  -webkit-transition: background-color 300ms ease-in-out, color 400ms ease-out, -webkit-transform 300ms ease-in;
+  transition: background-color 300ms ease-in-out, color 400ms ease-out, -webkit-transform 300ms ease-in;
+  transition: transform 300ms ease-in, background-color 300ms ease-in-out, color 400ms ease-out;
+  transition: transform 300ms ease-in, background-color 300ms ease-in-out, color 400ms ease-out, -webkit-transform 300ms ease-in;
+}
+
+header .nav ul li a {
+  all: unset;
 }
 
 .first {
@@ -4332,5 +4336,10 @@ header .nav ul li {
 .first section button:hover {
   -webkit-transform: scale(1.05);
           transform: scale(1.05);
+}
+
+.second {
+  min-height: 100vh;
+  background-color: #000014;
 }
 /*# sourceMappingURL=style.css.map */
