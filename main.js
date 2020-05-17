@@ -31,6 +31,19 @@ var team = /** @class */ (function () {
         });
         return sum;
     };
+    team.prototype.getmaxscorer = function () {
+        var scoreslist = [];
+        for (var _i = 0, _a = this.allplayers; _i < _a.length; _i++) {
+            var i = _a[_i];
+            scoreslist.push(i.getplayertotalscore());
+        }
+        var scorers = [];
+        this.allplayers.forEach(function (v) {
+            if (v.getplayertotalscore() == Math.max.apply(Math, scoreslist))
+                scorers.push(v.name);
+        });
+        this.maxplayers = scorers.join('\n');
+    };
     return team;
 }());
 document.addEventListener('DOMContentLoaded', function () {
@@ -70,13 +83,12 @@ document.addEventListener('DOMContentLoaded', function () {
     __span_h1_first.textContent = 'playing crciket';
     __button_first.type = 'button';
     __button_first.textContent = 'Play';
-    __button_first.setAttribute('data-target', '#_nav');
+    __button_first.setAttribute('data-target', '#_second');
     __button_first.addEventListener('click', function (event) {
-        __nav.style.transition = 'transform 2000ms ease-out';
-        __nav.style.display = 'flow-root';
-        __nav.style.opacity = '1';
-        __marquee.style.display = 'none';
-        window.location.href = __button_first.getAttribute('data-target');
+        // __nav.style.transition = 'transform 2000ms ease-out';
+        // __nav.style.display = 'flow-root';
+        // __nav.style.opacity = '1';
+        // __marquee.style.display = 'none';
     });
     document.querySelectorAll('.nav li').forEach(function (v) {
         v.addEventListener('click', function () {
@@ -105,6 +117,10 @@ document.addEventListener('DOMContentLoaded', function () {
     var __section_second = document.createElement('section');
     __second.appendChild(__section_second);
     __section_second.className = 'container-fluid';
+    var __output = document.createElement('div');
+    __section_second.appendChild(__output);
+    __output.innerHTML = "\n\t\t\t\t\t\t<p></p>\n\t\t\t\t\t\t<div>\n\t\t\t\t\t\t\t<h2></h2>\n\t\t\t\t\t\t\t<p class=\"manofthematch\">man of the match : \n</p>\n\t\t\t\t\t\t\t<span><button>play again</button></span>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<p></p>\n\t\t\t\t\t\t";
+    __output.className = 'container-fluid row output';
     var __instructions_second = document.createElement('div');
     __instructions_second.className = 'row instructions';
     __section_second.appendChild(__instructions_second);
@@ -121,10 +137,10 @@ document.addEventListener('DOMContentLoaded', function () {
     __tables_second.className = 'container-fluid row tables';
     var __first_table_second = document.createElement('div');
     __tables_second.appendChild(__first_table_second);
-    __first_table_second.className = 'col-md-12 col-lg-5 team1';
+    __first_table_second.className = 'col-md-12 col-lg-6 team1';
     var __second_table_second = document.createElement('div');
     __tables_second.appendChild(__second_table_second);
-    __second_table_second.className = 'col-md-12 col-lg-5 team2';
+    __second_table_second.className = 'col-md-12 col-lg-6 team2';
     var datavalue = 1;
     var playernumber;
     Array.from(__tables_second.children).forEach(function (v) {
@@ -140,7 +156,7 @@ document.addEventListener('DOMContentLoaded', function () {
     __button_second_team.type = 'button';
     __button_first_team.setAttribute('data-value', '1');
     __button_second_team.setAttribute('data-value', '2');
-    __button_first_team.textContent = 'bowl';
+    __button_first_team.textContent = 'bat';
     __button_first_team.type = 'button';
     var team1 = new team('team1');
     var team2 = new team('team2');
@@ -154,6 +170,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var btnpress = 0;
     var __seconds = 0;
     var isout = false;
+    var iscomplete = 0;
     __instructions_second.addEventListener('click', function (event) {
         if (event.target.tagName == 'BUTTON') {
             if (!btnpress++) {
@@ -161,9 +178,20 @@ document.addEventListener('DOMContentLoaded', function () {
                 function timer() {
                     __title_second.textContent = "" + ++__seconds;
                     __title_second.classList.add('active');
-                    if (__seconds == 60) {
+                    if (__seconds == 60 || __seconds == 0) {
+                        __title_second.textContent = '0';
+                        Array.from(event.target.parentElement.children).forEach(function (v) {
+                            v.style.display = 'inline-block';
+                        });
+                        event.target.style.display = 'none';
                         clearInterval(__seconds_display_1);
                         btnpress = 0;
+                        __seconds = 0;
+                        iscomplete++;
+                        if (iscomplete == 2) {
+                            this.style.display = 'none';
+                            displayoutput();
+                        }
                         return;
                     }
                 }
@@ -183,7 +211,14 @@ document.addEventListener('DOMContentLoaded', function () {
                     v.style.display = 'inline-block';
                 });
                 event.target.style.display = 'none';
+                __seconds = 0;
                 btnpress = 0;
+                timer();
+                iscomplete++;
+                if (iscomplete == 2) {
+                    this.style.display = 'none';
+                    displayoutput();
+                }
                 return;
             }
         }
@@ -206,9 +241,23 @@ document.addEventListener('DOMContentLoaded', function () {
             for (var i = 0; i < team.allplayers[j].ballscore.length; i++) {
                 document.querySelector("." + team.name + " .ball" + (6 * j + i + 1)).textContent = "" + team.allplayers[j]
                     .ballscore[i];
+                document.querySelector("." + team.name + " .ball" + (6 * j + i + 1)).classList.add('active');
                 document.querySelector("." + team.name + " .player" + j).textContent = "" + team.allplayers[j].getplayertotalscore();
             }
         }
+    }
+    function displayoutput() {
+        __output.style.visibility = 'visible';
+        var team1score = team1.gettotalscore();
+        var team2score = team2.gettotalscore();
+        var winner = Math.max(team1score, team2score) == team1score ? team1 : team2;
+        document.querySelector('h2').textContent = winner.name + " is the winner";
+        __output.firstChild.textContent = "team1 has scored " + team1score;
+        __output.lastChild.textContent = "team2 has scored " + team2score;
+        winner.getmaxscorer();
+        document.querySelector('.manofthematch').textContent += winner.maxplayers;
+        if (team1score == team2score)
+            document.querySelector('h2').textContent = 'it is a draw';
     }
 });
 //# sourceMappingURL=main.js.map

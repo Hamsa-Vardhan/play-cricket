@@ -4212,7 +4212,13 @@ html {
   :root {
     --all__font: 2rem;
   }
-  max-height: calc(max-width * 0.75);
+  .row .active, .row header .nav ul li:hover, header .nav ul .row li:hover, .row .first section button:hover, .first section .row button:hover, .row .second section .output > div button:hover, .second section .output > div .row button:hover, .row .second section .instructions button:hover, .second section .instructions .row button:hover {
+    background-color: #000014;
+    color: white !important;
+    -webkit-transform: scale(1.15);
+            transform: scale(1.15);
+    border-radius: calc(var(--all__font) / 10);
+  }
 }
 
 @media (max-width: 560px) {
@@ -4240,7 +4246,7 @@ html {
   display: none;
 }
 
-.active, header .nav ul li:hover, .first section button:hover, .second section .instructions button:hover {
+.active, header .nav ul li:hover, .first section button:hover, .second section .output > div button:hover, .second section .instructions button:hover {
   background-color: white;
   color: black !important;
   -webkit-transform: scale(1.15);
@@ -4355,6 +4361,51 @@ header .nav ul li a {
   place-items: center;
 }
 
+.second section .output {
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  font-family: 'Russo One', sans-serif;
+  text-transform: capitalize;
+  font-size: calc(var(--all__font) / 1.5);
+}
+
+.second section .output > div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+.second section .output > div > h2 {
+  font-size: calc(var(--all__font) / 1.5) !important;
+}
+
+.second section .output > div > * {
+  margin: calc(var(--all__font) / 4) 0px;
+}
+
+.second section .output > div button {
+  all: unset;
+  font-size: calc(var(--all__font) / 1.5);
+  padding: calc(var(--all__font) / 6) calc(var(--all__font) / 1.2);
+  border: 1px solid white;
+  border-radius: calc(var(--all__font) / 5);
+  text-align: center;
+}
+
+.second section .output > div button:hover {
+  cursor: pointer;
+}
+
 .second section .instructions {
   place-self: top;
   margin: calc(var(--all__font) * 2);
@@ -4370,6 +4421,7 @@ header .nav ul li a {
   margin-right: var(--all__font);
   border: 1px solid white;
   border-radius: calc(var(--all__font) / 5);
+  text-transform: capitalize;
   cursor: pointer;
 }
 
@@ -4381,7 +4433,10 @@ header .nav ul li a {
 .second .tables > div {
   border: 1px solid white;
   margin-top: var(--all__font);
-  border-radius: calc(var(--all__font) / 5);
+  border-radius: calc(var(--all__font) / 2);
+  background-color: white;
+  color: #000014;
+  border: calc(var(--all__font) / 10) solid #000014;
 }
 
 .second .tables > div .row {
@@ -4390,6 +4445,7 @@ header .nav ul li a {
   margin: calc(var(--all__font) / 10);
   padding: calc(var(--all__font) / 10);
   margin: calc(var(--all__font) / 5) 0px;
+  border-bottom: calc(var(--all__font) / 50) solid #000014;
 }
 
 .second .tables > div .row:last-child {
@@ -4401,9 +4457,6 @@ header .nav ul li a {
   text-transform: capitalize;
   padding: calc(var(--all__font)/10) 0px;
   font-size: calc(var(--all__font)/2);
-}
-
-.second .tables > div .row .active, .second .tables > div .row header .nav ul li:hover, header .nav ul .second .tables > div .row li:hover, .second .tables > div .row .first section button:hover, .first section .second .tables > div .row button:hover, .second .tables > div .row section .instructions button:hover, .second section .instructions .tables > div .row button:hover {
-  border-radius: calc(var(--all__font) / 10);
+  margin: calc(var(--all__font) / 50);
 }
 /*# sourceMappingURL=style.css.map */
