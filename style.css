@@ -4256,9 +4256,7 @@ header {
 
 header marquee {
   font-size: var(--all__font);
-  background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  background-clip: text;
-  color: transparent;
+  color: white;
 }
 
 header .nav {
@@ -4382,6 +4380,8 @@ header .nav ul li a {
 
 .second .tables > div {
   border: 1px solid white;
+  margin-top: var(--all__font);
+  border-radius: calc(var(--all__font) / 5);
 }
 
 .second .tables > div .row {
@@ -4400,6 +4400,7 @@ header .nav ul li a {
   text-align: center;
   text-transform: capitalize;
   padding: calc(var(--all__font)/10) 0px;
+  font-size: calc(var(--all__font)/2);
 }
 
 .second .tables > div .row .active, .second .tables > div .row header .nav ul li:hover, header .nav ul .second .tables > div .row li:hover, .second .tables > div .row .first section button:hover, .first section .second .tables > div .row button:hover, .second .tables > div .row section .instructions button:hover, .second section .instructions .tables > div .row button:hover {

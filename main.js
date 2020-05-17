@@ -1,9 +1,18 @@
 var player = /** @class */ (function () {
     function player(name) {
-        this.name;
+        this.ballscore = [];
+        this.name = name;
     }
     player.prototype.insertscore = function (score) {
-        this.totalscore = score.reduce(function (a, b) { return a + b; });
+        this.ballscore.push(score);
+    };
+    player.prototype.getplayertotalscore = function () {
+        var sum = 0;
+        for (var _i = 0, _a = this.ballscore; _i < _a.length; _i++) {
+            var i = _a[_i];
+            sum += i;
+        }
+        return sum;
     };
     return player;
 }());
@@ -18,7 +27,7 @@ var team = /** @class */ (function () {
     team.prototype.gettotalscore = function () {
         var sum = 0;
         this.allplayers.forEach(function (v) {
-            sum += v.totalscore;
+            sum += v.getplayertotalscore();
         });
         return sum;
     };
@@ -99,76 +108,106 @@ document.addEventListener('DOMContentLoaded', function () {
     var __instructions_second = document.createElement('div');
     __instructions_second.className = 'row instructions';
     __section_second.appendChild(__instructions_second);
+    var __button_first_team = document.createElement('button');
+    __instructions_second.appendChild(__button_first_team);
     var __title_second = document.createElement('h1');
     __instructions_second.appendChild(__title_second);
     //__title_second.className = 'col-3 offset-4';
-    var __button_second = document.createElement('button');
-    __instructions_second.appendChild(__button_second);
-    //__button_second.className = 'col-2';
+    var __button_second_team = document.createElement('button');
+    __instructions_second.appendChild(__button_second_team);
+    //__button_second_team.className = 'col-2';
     var __tables_second = document.createElement('div');
     __section_second.appendChild(__tables_second);
     __tables_second.className = 'container-fluid row tables';
     var __first_table_second = document.createElement('div');
     __tables_second.appendChild(__first_table_second);
-    __first_table_second.className = 'col-md-12 col-lg-5';
+    __first_table_second.className = 'col-md-12 col-lg-5 team1';
     var __second_table_second = document.createElement('div');
     __tables_second.appendChild(__second_table_second);
-    __second_table_second.className = 'col-md-12 col-lg-5';
+    __second_table_second.className = 'col-md-12 col-lg-5 team2';
     var datavalue = 1;
     var playernumber;
     Array.from(__tables_second.children).forEach(function (v) {
-        v.innerHTML = "\n\t\t<div class=\"row\">\n\t\t\t<div class=\"col-3 active\">parent</div>\n\t\t\t<div class=\"col-1\">B1</div>\n\t\t\t<div class=\"col-1\">B2</div>\n\t\t\t<div class=\"col-1\">B3</div>\n\t\t\t<div class=\"col-1\">B4</div>\n\t\t\t<div class=\"col-1\">B5</div>\n\t\t\t<div class=\"col-1\">B6</div>\n\t\t\t<div class=\"col-3\">Total</div>\n\t\t</div>";
+        v.innerHTML = "\n\t\t<div class=\"row\">\n\t\t\t<div class=\"col-3\">player</div>\n\t\t\t<div class=\"col-1\">B1</div>\n\t\t\t<div class=\"col-1\">B2</div>\n\t\t\t<div class=\"col-1\">B3</div>\n\t\t\t<div class=\"col-1\">B4</div>\n\t\t\t<div class=\"col-1\">B5</div>\n\t\t\t<div class=\"col-1\">B6</div>\n\t\t\t<div class=\"col-3\">Total</div>\n\t\t</div>";
         datavalue = 0;
         playernumber = 0;
         for (var i = 1; i <= 10; i++) {
-            v.innerHTML += "\n\t\t\t<div class=\"row\">\n\t\t\t\t<div class=\"col-3\">parent" + i + "</div>\n\t\t\t\t<div class=\"col-1 ball" + ++datavalue + "\"></div>\n\t\t\t\t<div class=\"col-1 ball" + ++datavalue + "\"></div>\n\t\t\t\t<div class=\"col-1 ball" + ++datavalue + "\"></div>\n\t\t\t\t<div class=\"col-1 ball" + ++datavalue + "\"></div>\n\t\t\t\t<div class=\"col-1 ball" + ++datavalue + "\"></div>\n\t\t\t\t<div class=\"col-1 ball" + ++datavalue + "\"></div>\n\t\t\t\t<div class=\"col-3 over" + playernumber++ + "\"></div>\n\t\t\t</div>";
+            v.innerHTML += "\n\t\t\t<div class=\"row\">\n\t\t\t\t<div class=\"col-3\">player" + i + "</div>\n\t\t\t\t<div class=\"col-1 ball" + ++datavalue + "\"></div>\n\t\t\t\t<div class=\"col-1 ball" + ++datavalue + "\"></div>\n\t\t\t\t<div class=\"col-1 ball" + ++datavalue + "\"></div>\n\t\t\t\t<div class=\"col-1 ball" + ++datavalue + "\"></div>\n\t\t\t\t<div class=\"col-1 ball" + ++datavalue + "\"></div>\n\t\t\t\t<div class=\"col-1 ball" + ++datavalue + "\"></div>\n\t\t\t\t<div class=\"col-3 player" + playernumber++ + "\"></div>\n\t\t\t</div>";
         }
     });
     __title_second.textContent = '0';
-    __button_second.textContent = 'start';
-    __button_second.type = 'button';
-    __button_second.addEventListener('click', function (event) {
-        this.style.display = 'none';
-        var seconds = setInterval(printseconds, 1000);
-        var count = 0;
-        function printseconds() {
-            __title_second.textContent = "" + ++count;
-            __title_second.classList.add('active');
-            appenddata(count);
-            if (count == 60) {
-                clearInterval(seconds);
-                __button_second.style.display = 'inline-block';
-                __button_second.textContent = 'play again';
-                __title_second.classList.remove('active');
+    __button_second_team.textContent = 'bowl';
+    __button_second_team.type = 'button';
+    __button_first_team.setAttribute('data-value', '1');
+    __button_second_team.setAttribute('data-value', '2');
+    __button_first_team.textContent = 'bowl';
+    __button_first_team.type = 'button';
+    var team1 = new team('team1');
+    var team2 = new team('team2');
+    for (var _i = 0, _a = [team1, team2]; _i < _a.length; _i++) {
+        var j = _a[_i];
+        for (var i = 1; i <= 10; i++) {
+            j.insert(new player("player" + i));
+        }
+    }
+    var __teams_second = document.querySelectorAll('.col-lg-5');
+    var btnpress = 0;
+    var __seconds = 0;
+    var isout = false;
+    __instructions_second.addEventListener('click', function (event) {
+        if (event.target.tagName == 'BUTTON') {
+            if (!btnpress++) {
+                var __seconds_display_1 = setInterval(timer, 1000);
+                function timer() {
+                    __title_second.textContent = "" + ++__seconds;
+                    __title_second.classList.add('active');
+                    if (__seconds == 60) {
+                        clearInterval(__seconds_display_1);
+                        btnpress = 0;
+                        return;
+                    }
+                }
+            }
+            if (event.target.getAttribute('data-value') == '1') {
+                getdata(btnpress, team1);
+                document.querySelector('button[data-value="2"]').style.display = 'none';
+            }
+            else {
+                getdata(btnpress, team2);
+                document.querySelector('[data-value="1"]').style.display = 'none';
+            }
+            if (isout)
+                btnpress += 6 - btnpress % 6;
+            if (btnpress >= 60) {
+                Array.from(event.target.parentElement.children).forEach(function (v) {
+                    v.style.display = 'inline-block';
+                });
+                event.target.style.display = 'none';
+                btnpress = 0;
+                return;
             }
         }
     });
-    var isout = false;
-    playernumber = 0;
-    var totalscore = 0;
-    var scores = [];
-    var score;
     function randomnumber(n) {
-        return Math.floor(Math.random() * (n + 1));
+        var out = Math.floor(Math.random() * (n + 1));
+        return out;
     }
-    function appenddata(count) {
-        if (!isout) {
-            score = randomnumber(6);
-            document.querySelector(".ball" + count).textContent = "" + score;
-            document.querySelector('.row .active').classList.remove('active');
-            totalscore += score;
-            document.querySelector(".over" + playernumber).textContent = "" + totalscore;
-            if (score == 0 || count % 6 == 0) {
-                scores.push(totalscore);
-                isout = true;
+    function getdata(count, team) {
+        var ballscore = randomnumber(6);
+        team.allplayers[Math.floor((count - 1) / 6)].insertscore(ballscore);
+        isout = false;
+        printintable(team);
+        if (ballscore == 0 && count % 6)
+            isout = true;
+        return isout;
+    }
+    function printintable(team) {
+        for (var j = 0; j < team.allplayers.length; j++) {
+            for (var i = 0; i < team.allplayers[j].ballscore.length; i++) {
+                document.querySelector("." + team.name + " .ball" + (6 * j + i + 1)).textContent = "" + team.allplayers[j]
+                    .ballscore[i];
+                document.querySelector("." + team.name + " .player" + j).textContent = "" + team.allplayers[j].getplayertotalscore();
             }
-        }
-        if (playernumber == Math.floor(count / 6)) {
-        }
-        else {
-            isout = false;
-            playernumber = Math.floor(count / 6);
-            totalscore = 0;
         }
     }
 });
