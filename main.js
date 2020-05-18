@@ -89,6 +89,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // __nav.style.display = 'flow-root';
         // __nav.style.opacity = '1';
         // __marquee.style.display = 'none';
+        window.location.href = '#_second';
     });
     document.querySelectorAll('.nav li').forEach(function (v) {
         v.addEventListener('click', function () {
@@ -143,14 +144,17 @@ document.addEventListener('DOMContentLoaded', function () {
     __second_table_second.className = 'col-md-12 col-lg-6 team2';
     var datavalue = 1;
     var playernumber;
-    Array.from(__tables_second.children).forEach(function (v) {
-        v.innerHTML = "\n\t\t<div class=\"row\">\n\t\t\t<div class=\"col-3\">player</div>\n\t\t\t<div class=\"col-1\">B1</div>\n\t\t\t<div class=\"col-1\">B2</div>\n\t\t\t<div class=\"col-1\">B3</div>\n\t\t\t<div class=\"col-1\">B4</div>\n\t\t\t<div class=\"col-1\">B5</div>\n\t\t\t<div class=\"col-1\">B6</div>\n\t\t\t<div class=\"col-3\">Total</div>\n\t\t</div>";
-        datavalue = 0;
-        playernumber = 0;
-        for (var i = 1; i <= 10; i++) {
-            v.innerHTML += "\n\t\t\t<div class=\"row\">\n\t\t\t\t<div class=\"col-3\">player" + i + "</div>\n\t\t\t\t<div class=\"col-1 ball" + ++datavalue + "\"></div>\n\t\t\t\t<div class=\"col-1 ball" + ++datavalue + "\"></div>\n\t\t\t\t<div class=\"col-1 ball" + ++datavalue + "\"></div>\n\t\t\t\t<div class=\"col-1 ball" + ++datavalue + "\"></div>\n\t\t\t\t<div class=\"col-1 ball" + ++datavalue + "\"></div>\n\t\t\t\t<div class=\"col-1 ball" + ++datavalue + "\"></div>\n\t\t\t\t<div class=\"col-3 player" + playernumber++ + "\"></div>\n\t\t\t</div>";
-        }
-    });
+    function createTable() {
+        Array.from(__tables_second.children).forEach(function (v) {
+            v.innerHTML = "\n\t\t\t<div class=\"row\">\n\t\t\t\t<div class=\"col-3\">player</div>\n\t\t\t\t<div class=\"col-1\">B1</div>\n\t\t\t\t<div class=\"col-1\">B2</div>\n\t\t\t\t<div class=\"col-1\">B3</div>\n\t\t\t\t<div class=\"col-1\">B4</div>\n\t\t\t\t<div class=\"col-1\">B5</div>\n\t\t\t\t<div class=\"col-1\">B6</div>\n\t\t\t\t<div class=\"col-3\">Total</div>\n\t\t\t</div>";
+            datavalue = 0;
+            playernumber = 0;
+            for (var i = 1; i <= 10; i++) {
+                v.innerHTML += "\n\t\t\t\t<div class=\"row\">\n\t\t\t\t\t<div class=\"col-3\">player" + i + "</div>\n\t\t\t\t\t<div class=\"col-1 ball" + ++datavalue + "\"></div>\n\t\t\t\t\t<div class=\"col-1 ball" + ++datavalue + "\"></div>\n\t\t\t\t\t<div class=\"col-1 ball" + ++datavalue + "\"></div>\n\t\t\t\t\t<div class=\"col-1 ball" + ++datavalue + "\"></div>\n\t\t\t\t\t<div class=\"col-1 ball" + ++datavalue + "\"></div>\n\t\t\t\t\t<div class=\"col-1 ball" + ++datavalue + "\"></div>\n\t\t\t\t\t<div class=\"col-3 player" + ++playernumber + "\"></div>\n\t\t\t\t</div>";
+            }
+        });
+    }
+    createTable();
     __title_second.textContent = '0';
     __button_second_team.textContent = 'bowl';
     __button_second_team.type = 'button';
@@ -187,11 +191,6 @@ document.addEventListener('DOMContentLoaded', function () {
                         clearInterval(__seconds_display_1);
                         btnpress = 0;
                         __seconds = 0;
-                        iscomplete++;
-                        if (iscomplete == 2) {
-                            this.style.display = 'none';
-                            displayoutput();
-                        }
                         return;
                     }
                 }
@@ -213,7 +212,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 event.target.style.display = 'none';
                 __seconds = 0;
                 btnpress = 0;
-                timer();
+                4;
                 iscomplete++;
                 if (iscomplete == 2) {
                     this.style.display = 'none';
@@ -242,10 +241,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.querySelector("." + team.name + " .ball" + (6 * j + i + 1)).textContent = "" + team.allplayers[j]
                     .ballscore[i];
                 document.querySelector("." + team.name + " .ball" + (6 * j + i + 1)).classList.add('active');
-                document.querySelector("." + team.name + " .player" + j).textContent = "" + team.allplayers[j].getplayertotalscore();
+                document.querySelector("." + team.name + " .player" + (j + 1)).textContent = "" + team.allplayers[j].getplayertotalscore();
             }
         }
     }
+    document.querySelector('.output button').addEventListener('click', function (event) {
+        window.location.reload();
+    });
     function displayoutput() {
         __output.style.visibility = 'visible';
         var team1score = team1.gettotalscore();
@@ -258,6 +260,12 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelector('.manofthematch').textContent += winner.maxplayers;
         if (team1score == team2score)
             document.querySelector('h2').textContent = 'it is a draw';
+        else {
+            document.querySelector("." + winner.name).classList.add('winner');
+            if (winner.maxplayers.split(' ').length == 1) {
+                document.querySelector("." + winner.name + " ." + winner.maxplayers).parentElement.classList.add('active');
+            }
+        }
     }
 });
 //# sourceMappingURL=main.js.map

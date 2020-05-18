@@ -4246,6 +4246,16 @@ html {
   display: none;
 }
 
+.winner {
+  background-color: #000014 !important;
+  color: white !important;
+  border: calc(var(--all__font) / 50) solid white !important;
+}
+
+.winner .row {
+  border-bottom: calc(var(--all__font) / 50) solid white !important;
+}
+
 .active, header .nav ul li:hover, .first section button:hover, .second section .output > div button:hover, .second section .instructions button:hover {
   background-color: white;
   color: black !important;
