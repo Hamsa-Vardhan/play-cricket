@@ -265,6 +265,11 @@ document.addEventListener('DOMContentLoaded', function () {
             if (winner.maxplayers.split(' ').length == 1) {
                 document.querySelector("." + winner.name + " ." + winner.maxplayers).parentElement.classList.add('active');
             }
+            else {
+                winner.maxplayers.split(' ').forEach(function (v) {
+                    document.querySelector("." + winner.name + " ." + v).parentElement.classList.add('active');
+                });
+            }
         }
     }
 });

@@ -4377,6 +4377,7 @@ header .nav ul li a {
   font-family: 'Russo One', sans-serif;
   text-transform: capitalize;
   font-size: calc(var(--all__font) / 1.5);
+  visibility: hidden;
 }
 
 .second section .output > div {
